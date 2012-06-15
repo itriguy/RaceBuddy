@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Race Buddy</string>
+
+    <string name="name">Name</string>
+    <string name="date">Date</string>
+    <string name="datePickerButton">Pick the Date</string>
+    <string name="details">Details</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="tweet">Tweet It</string>
+
+    <string name="race_title">Race Details</string>
+    <string name="race_times">Race Times</string>
+    <string name="race_name_hint">Enter the name of the race</string>
+    <string name="race_time_estimated">Estimated time</string>
+    <string name="race_time_estimate_hint">Estimated time</string>
+    <string name="race_time_actual">Actual time</string>
+    <string name="race_time_actual_hint">Enter actual time</string>
+    <string name="race_date_hint">Select the date of the race</string>
+    <string name="race_details_hint">Enter other details about the race</string>
+
+    <string name="template_title">Create New Race</string>
+    <string name="template_race_name_hint">Enter race name</string>
+    <string name="template_race_date_hint">Select race date</string>
+    <string name="template_list_hint">Select your desired items for race</string>
+
+    <string name="template_generate">Generate</string>
+    <string name="template_generate_hint">Generate Checklist</string>
+
+</resources>

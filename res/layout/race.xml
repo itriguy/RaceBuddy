@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Main Layout of Status Activity -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:orientation="vertical" android:layout_width="fill_parent"
+      android:layout_height="fill_parent" android:background="@drawable/background">
+
+    <!-- Race Name -->
+    <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+              android:layout_marginBottom="5dp" android:layout_marginTop="10dp"
+              android:layout_marginLeft="5dp" android:gravity="left" android:textColor="#336699"
+              android:textSize="20sp" android:text="@string/name" android:id="@+id/lblRaceName"/>
+    <EditText android:layout_width="fill_parent" android:layout_height="wrap_content"
+        android:hint="@string/race_name_hint" android:id="@+id/raceName"
+        android:layout_below="@id/lblRaceName" android:gravity="top|center_horizontal"/>
+
+
+    <!-- Race Date -->
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:layout_marginBottom="5dp" android:layout_marginTop="10dp"
+                  android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
+                  android:textColor="#336699"
+                  android:gravity="left" android:textSize="20sp" android:text="@string/date"
+                  android:id="@+id/lblSelectDate" android:layout_below="@id/raceName" />
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:layout_marginBottom="5dp" android:layout_marginTop="10dp"
+                      android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
+                      android:layout_toRightOf="@id/lblSelectDate" android:textColor="#336699"
+                      android:gravity="left" android:textSize="20sp" android:text="@string/date"
+                      android:id="@+id/raceDate" android:layout_below="@id/raceName" />
+    <Button android:id="@+id/raceDatePicker"
+            android:layout_below="@id/raceName" android:layout_toRightOf="@id/raceDate"
+            android:layout_width="wrap_content" android:layout_alignParentRight="true"
+            android:layout_height="wrap_content" android:textSize="20sp"
+            android:text="@string/datePickerButton"/>
+
+
+    <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+                  android:layout_marginBottom="5dp" android:layout_marginTop="15dp"
+                  android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:gravity="left"
+                  android:textSize="20sp" android:text="@string/race_times" android:textColor="#336699"
+                  android:id="@+id/lblRaceTimes" android:layout_below="@id/raceDatePicker" />
+
+    <!-- Race Esitmated Time -->
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_marginBottom="5dp" android:layout_marginTop="10dp"
+              android:layout_marginLeft="5dp" android:layout_marginRight="5dp"  android:gravity="left"
+              android:textSize="20sp" android:text="@string/race_time_estimated"
+              android:textColor="#336699"
+              android:id="@+id/lblRaceTimeEstimate" android:layout_below="@id/lblRaceTimes" />
+    <EditText android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/raceTimeEstimate" android:hint="@string/race_time_estimate_hint"
+        android:layout_toRightOf="@id/lblRaceTimeEstimate" android:layout_below="@id/lblRaceTimes"
+        android:gravity="top|center_horizontal"/>
+
+    <!-- Race Times -->
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_marginBottom="5dp" android:layout_marginTop="10dp"
+              android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:gravity="left"
+              android:textSize="20sp" android:text="@string/race_time_actual" android:textColor="#336699"
+              android:id="@+id/lblRaceTimeActual" android:layout_below="@id/lblRaceTimeEstimate" />
+    <EditText android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/raceTimeEstimate" android:layout_toRightOf="@id/lblRaceTimeActual"
+        android:hint="@string/race_time_actual_hint" android:id="@+id/raceTimeActual"
+        android:gravity="top|center_horizontal"></EditText>
+
+    <!--&lt;!&ndash; Race details &ndash;&gt;-->
+    <!--<TextView android:layout_width="fill_parent" android:layout_height="wrap_content"-->
+                  <!--android:layout_marginBottom="5dp" android:layout_marginTop="10dp"-->
+                  <!--android:layout_marginLeft="5dp" android:gravity="left"-->
+                  <!--android:textSize="20sp" android:text="@string/details"-->
+                  <!--android:id="@+id/lblRaceDetails" android:layout_below="@id/lblRaceTimeActual" />-->
+    <!--<EditText android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent" -->
+        <!--android:hint="@string/race_details_hint" android:id="@+id/raceDetails"-->
+        <!--android:layout_below="@id/lblRaceDetails" android:gravity="top|center_horizontal"/>-->
+
+
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="15dp" android:layout_below="@id/raceTimeActual"
+            android:layout_alignParentRight="true" android:text="@string/tweet"
+            android:textSize="20sp" android:id="@+id/raceTweet"/>
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="15dp" android:layout_below="@id/raceTimeActual" android:text="@string/save"
+            android:layout_toLeftOf="@id/raceTweet" android:textSize="20sp" android:id="@+id/raceSave"/>
+
+</RelativeLayout>
