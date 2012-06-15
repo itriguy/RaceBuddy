@@ -18,8 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xmatters.android.racebuddy.R;
+import com.xmatters.android.racebuddy.RaceBuddyApplication;
+import com.xmatters.android.racebuddy.db.Race;
+import com.xmatters.android.racebuddy.db.RaceDAO;
 import com.xmatters.android.racebuddy.twitter.Tweeter;
 import com.xmatters.android.racebuddy.utility.DateUtility;
+import com.xmatters.android.racebuddy.utility.UpdaterService;
 
 /**
  * Race Activity - Main Screen for tracking races, checklists, ...
@@ -40,6 +44,9 @@ public class RaceActivity extends Activity {
     private int year;
     private int month;
     private int day;
+
+    private Race race;
+    private RaceDAO raceDAO;
 
     private Tweeter tweeter;
 
@@ -63,6 +70,9 @@ public class RaceActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.race);
 
+        raceDAO = new RaceDAO(((RaceBuddyApplication)getApplication()).getApplicationContext());
+        race = new Race();
+
         // capture our View elements
         txtName = (EditText) findViewById(R.id.raceName);
 //        txtDetails = (EditText) findViewById(R.id.raceDetails);
@@ -73,6 +83,8 @@ public class RaceActivity extends Activity {
         btnTweet = (Button) findViewById(R.id.raceTweet);
 
         btnDatePicker = (Button) findViewById(R.id.raceDatePicker);
+
+        raceToUI();
 
         //--- NOTE Need to handle this differently for existing race - don't overwrite
         year = DateUtility.getCurrentYear();
@@ -89,34 +101,63 @@ public class RaceActivity extends Activity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.i(TAG, "Saving content....");
+                uiToRace();
+                raceDAO.saveRace(race);
             }
         });
 
         btnTweet.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.i(TAG, "Tweeting content....");
-                new PostToTwitter().execute(getTweetMessage());
+                uiToRace();
+                new PostToTwitter().execute(race.toTweet());
             }
         });
 
         updateDisplay();
     }
 
+    private void raceToUI() {
+        if(race == null){
+            race = new Race();
+        }
+        txtName.setText(race.getName());
+        txtTimeActual.setText(race.getActualTime());
+        txtTimeEstimate.setText(race.getEstimatedTime());
+        txtDate.setText(race.getDate());
+    }
+
+    private void uiToRace() {
+        if(race == null){
+            race = new Race();
+        }
+        race.setName(txtName.getText().toString());
+        race.setActualTime(txtTimeActual.getText().toString());
+        race.setEstimatedTime(txtTimeEstimate.getText().toString());
+        race.setDate(txtDate.getText().toString());
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-      MenuInflater inflater = getMenuInflater();   //
-      inflater.inflate(R.menu.menu, menu);         //
-      return true; //
+      MenuInflater inflater = getMenuInflater();
+      inflater.inflate(R.menu.menu, menu);
+      return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-      switch (item.getItemId()) {                              //
-      case R.id.itemPrefs:
-        startActivity(new Intent(this, PrefsActivity.class));  //
-      break;
-      }
-      return true;  //
+        switch(item.getItemId()) {
+            case R.id.itemPrefs:
+                startActivity(new Intent(this, PrefsActivity.class));
+                break;
+            case R.id.itemServiceStart:
+                startService(new Intent(this, UpdaterService.class));
+                break;
+            case R.id.itemServiceStop:
+                stopService(new Intent(this, UpdaterService.class));
+                break;
+        }
+      return true;
     }
 
     private void updateDisplay() {
@@ -138,25 +179,13 @@ public class RaceActivity extends Activity {
         return null;
     }
 
-    protected String getTweetMessage(){
-        StringBuilder builder = new StringBuilder();
-        boolean completed = (txtTimeActual.getText() == null || txtTimeActual.getText().toString().isEmpty()) ? false : true;
-        builder.append(completed ? "Raced " : "Racing ");
-        builder.append(txtName.getText());
-        builder.append(" on " + txtDate.getText());
-        builder.append(completed ? " finishing in " : " expecting ");
-        builder.append(completed ? txtTimeActual.getText() : txtTimeEstimate.getText());
-        builder.append(" - via RaceBuddy");
-        return builder.toString();
-    }
-
     // Asynchronously posts to twitter
     class PostToTwitter extends AsyncTask<String, Integer, String> { //
 
         // Called to initiate the background activity
         @Override
         protected String doInBackground(String... statuses) { //
-            tweeter = new Tweeter();
+            tweeter = ((RaceBuddyApplication) getApplication()).getTweeter();
             String msg = tweeter.tweet(statuses[0]);
             Log.i(TAG, msg);
             return msg;

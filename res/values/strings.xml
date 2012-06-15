@@ -34,4 +34,7 @@
     <string name="template_generate">Generate</string>
     <string name="template_generate_hint">Generate Checklist</string>
 
+    <string name="title_services_start">Start Services</string>
+    <string name="title_services_stop">Stop Services</string>
+
 </resources>
