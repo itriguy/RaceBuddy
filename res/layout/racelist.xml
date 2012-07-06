@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+    <!-- Title  -->
+    <!--<TextView android:layout_width="wrap_content"-->
+              <!--android:layout_height="wrap_content" android:layout_gravity="center"-->
+              <!--android:layout_margin="10dp" android:text="@string/races_title"-->
+              <!--android:textColor="#fff" android:textSize="30sp"/>-->
+
+    <!-- RACE LIST -->
+    <ListView android:layout_height="fill_parent"
+        android:layout_width="fill_parent" android:id="@+id/listRaces"
+        android:background="#6000" />
+
+</LinearLayout>

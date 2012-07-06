@@ -11,6 +11,7 @@
     <string name="tweet">Tweet It</string>
     <string name="prefs">Preferences</string>
 
+    <string name="races_title">Races</string>
     <string name="race_title">Race Details</string>
     <string name="race_times">Race Times</string>
     <string name="race_name_hint">Enter the name of the race</string>
@@ -36,5 +37,10 @@
 
     <string name="title_services_start">Start Services</string>
     <string name="title_services_stop">Stop Services</string>
+
+    <string name="title_sort_races_by_time">Sort by Time</string>
+    <string name="title_delete_race">Delete</string>
+    <string name="title_edit_race">Edit</string>
+    <string name="title_add_race">New</string>
 
 </resources>

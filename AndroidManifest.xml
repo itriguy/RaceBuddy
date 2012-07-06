@@ -3,19 +3,34 @@
           package="com.xmatters.android.racebuddy"
           android:versionCode="1"
           android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="10"/>
+
     <application android:label="@string/app_name" android:name=".RaceBuddyApplication">
+
+        <!-- Activities are the controllers for UI forms -->
+        <!-- android:name refers to the relative path to the activity class -->
+        <!-- android:label refers to the i18n string or hard coded string -->
         <activity android:name=".activity.RaceActivity"
-                  android:label="@string/app_name">
+                  android:label="@string/race_title">
+
+        </activity>
+        <activity android:name=".activity.PrefsActivity"
+                      android:label="@string/prefs" />
+
+        <activity android:name=".activity.RacesActivity" android:label="@string/races_title">
+            <!-- This intent filter tells Android to use this as the launching point for the app -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.PrefsActivity"
-                      android:label="@string/prefs" />
+
+        <!-- Services represent background services you can start or stop -->
         <service android:name=".utility.UpdaterService" />
     </application>
 
+    <!-- This defines the minimum required version of the android SDK -->
+    <uses-sdk android:minSdkVersion="10"/>
+
+    <!-- Permissions are required to access different functionality -->
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest> 
